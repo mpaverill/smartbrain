@@ -78,11 +78,33 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
+<<<<<<< HEAD
     fetch('http://localhost:3000/imageurl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         input: this.state.input
+=======
+    fetch('http://localhost:3000/imageurl',{
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({input: this.state.input})
+    })
+    .then(response => response.json())
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:3000/image',{
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: this.state.user.id})
+          })
+          .then(response => response.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count}))
+          })
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response))
+>>>>>>> f727470dac1eea8bff23918f74ca05db4335343d
       })
     })
     .then(response => response.json())

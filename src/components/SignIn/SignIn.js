@@ -26,7 +26,9 @@ class SignIn extends React.Component{
 				email: this.state.signInEmail,
 				password: this.state.signInPassword
 			})
-		}).then(response => response.json())
+		})
+
+		.then(response => response.json())
 	      .then(user => {
 	        if (user.id) {
 	          this.props.loadUser(user)
@@ -34,7 +36,6 @@ class SignIn extends React.Component{
 	        }
 	      })
 	  }
-
 	render(){
 		const { onRouteChange } = this.props;
 		return(
