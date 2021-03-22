@@ -78,20 +78,13 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
-<<<<<<< HEAD
-    fetch('http://localhost:3000/imageurl', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        input: this.state.input
-=======
     fetch('http://localhost:3000/imageurl',{
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({input: this.state.input})
     })
     .then(response => response.json())
-      .then(response => {
+    .then(response => {
         if (response) {
           fetch('http://localhost:3000/image',{
             method: 'put',
@@ -104,29 +97,9 @@ class App extends Component {
           })
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
->>>>>>> f727470dac1eea8bff23918f74ca05db4335343d
       })
+      .catch(err => console.log(err));
     })
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        fetch('http://localhost:3000/image',{
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: this.state.user.id
-          })
-        })
-        .then(response => response.json())
-        .then(count => {
-          this.setState(Object.assign(this.state.user, { entries: count}))
-        })
-        .catch(console.log)
-      }
-      this.displayFaceBox(this.calculateFaceLocation(response))
-    })
-    .catch(err => console.log(err));
-  } 
   
 
   onRouteChange = (route) => {
